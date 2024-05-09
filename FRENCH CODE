@@ -1,0 +1,41 @@
+#Importez le module arcgis.gis. Ce module est le point d'entrée dans le SIG et fournit les fonctionnalités permettant de gérer le contenu du SIG, les utilisateurs et les groupes.
+
+
+from arcgis.gis import GIS
+
+
+gis = GIS(api_key="YOUR_API_KEY")
+
+ # Créer une instance du widget carte et définir la carte de base.
+
+map = gis.map()
+ map.basemap = "topo-vector"
+
+
+
+
+ # Définir le centre de la carte et le niveau de zoom
+
+ map.center = [34.027, -118.805]
+ map.zoom = 13
+
+
+
+
+map # affiche la carte
+
+
+
+
+# Facultatif : Utilisez la méthode export_to_html pour exporter l'état actuel du widget carte vers un fichier HTML statique qui peut être visualisé dans n'importe quel navigateur web.
+
+
+from os import path, getcwd
+ export_dir = path.join(getcwd(), "home")
+ if not path.isdir(export_dir) :
+    os.mkdir(export_dir)
+
+
+export_path = path.join(export_dir, "display-a-map.html")
+ 
+ map.export_to_html(export_path, title="Afficher une carte")
